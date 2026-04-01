@@ -1053,15 +1053,19 @@ version = "0.1.0"
 source = { virtual = "." }
 dependencies = [
     { name = "crewai" },
+    { name = "httpx" },
     { name = "mlflow" },
     { name = "pydantic" },
+    { name = "pyyaml" },
 ]
 
 [package.metadata]
 requires-dist = [
     { name = "crewai", specifier = ">=1.12.2" },
+    { name = "httpx", specifier = ">=0.28.0" },
     { name = "mlflow", specifier = ">=3.10.1" },
     { name = "pydantic", specifier = ">=2.11.10" },
+    { name = "pyyaml", specifier = ">=6.0" },
 ]
 
 [[package]]
