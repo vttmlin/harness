@@ -1,7 +1,9 @@
+from typing import Any
+
 from crewai import Agent
 
-from adapters import init_adapters, load_adapter
-from config import load_config
+from harness.adapters import init_adapters, load_adapter
+from harness.config import load_config
 
 
 def build_agent(
@@ -26,7 +28,7 @@ def build_agent(
     """
     chat_adapter = load_adapter(chat_model)
 
-    agent_kwargs: dict = {
+    agent_kwargs: dict[str, Any] = {
         "role": role,
         "goal": goal,
         "backstory": backstory,
