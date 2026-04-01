@@ -2,7 +2,7 @@ import os
 import re
 from typing import Literal
 
-from pydantic import BaseModel
+from pydantic import BaseModel, field_validator
 
 
 def _resolve_env(value: str) -> str:
@@ -20,9 +20,10 @@ class Provider(BaseModel):
     base_url: str
     api_key: str
 
-    def model_post_init(self) -> None:
-        self.api_key = _resolve_env(self.api_key)
-        self.base_url = _resolve_env(self.base_url)
+    @field_validator("api_key", "base_url", mode="after")
+    @classmethod
+    def resolve_env_vars(cls, v: str) -> str:
+        return _resolve_env(v)
 
 
 class Model(BaseModel):
