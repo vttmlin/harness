@@ -1,14 +1,16 @@
 
 providers:
   - name: zhipu
-    driver: xxxx
-    url: https://open.bigmodel.cn/api/coding/paas/v4
-    ak: 2f1338894c9942efb90af06eac4c4bdf.VCLW6FSNn35QqzR3
+    driver: anthropic
+    url: https://open.bigmodel.cn/api/anthropic
+    token: 2f1338894c9942efb90af06eac4c4bdf.VCLW6FSNn35QqzR3
   - name: minimax
-    driver: xxxx
+    driver: anthropic
+    url: https://platform.minimaxi.com
+    token: sk-cp-IY2En8vtyGu2C78q8YZq5tVTQqJOQhb_nrZnciQQ7n7Fw0mZbfAkQxS85hm452OkAQJOAng_NJYgVKrGZW15vvRN6L1u15CZSCrrNPUY8cQyvdcvTmjirk8
   - name: siliconflow
-    driver: xxxx
-    apiKey: sk-qhjitekqnakypkhelgknwcbsvlfmcwskvytovtxkeprrtkvf
+    driver: siliconflow # 这个 driver 怎么定义？ 模型还需要兼容 chat、embed、rerank
+    token: sk-qhjitekqnakypkhelgknwcbsvlfmcwskvytovtxkeprrtkvf
 
 models:
   - name: GLM-5.1
