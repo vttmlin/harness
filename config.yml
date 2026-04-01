@@ -1,0 +1,32 @@
+
+providers:
+  - name: zhipu
+    driver: xxxx
+    url: https://open.bigmodel.cn/api/coding/paas/v4
+    ak: 2f1338894c9942efb90af06eac4c4bdf.VCLW6FSNn35QqzR3
+  - name: minimax
+    driver: xxxx
+  - name: siliconflow
+    driver: xxxx
+    apiKey: sk-qhjitekqnakypkhelgknwcbsvlfmcwskvytovtxkeprrtkvf
+
+models:
+  - name: GLM-5.1
+    provider: zhipu
+    model: GLM-5.1
+    roles:
+      - chat
+  - name: Qwen/Qwen3-Embedding-8B
+    provider: siliconflow
+    model: Qwen/Qwen3-Embedding-8B
+    roles:
+      - embed
+  - name: Qwen/Qwen3-Reranker-8B
+    provider: siliconflow
+    model: Qwen/Qwen3-Reranker-8B
+    roles:
+      - rerank
+
+
+  
+  
