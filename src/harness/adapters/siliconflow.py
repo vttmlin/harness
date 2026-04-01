@@ -1,12 +1,17 @@
+from __future__ import annotations
+
 import httpx
+from typing import Any
 
 from crewai import LLM
 from openai import OpenAI
+from typing_extensions import final
 
-from config import Model, Provider
+from harness.config import Model, Provider
 from .base import BaseAdapter
 
 
+@final
 class SiliconFlowAdapter(BaseAdapter):
     """
     Provider driver: siliconflow
@@ -15,7 +20,16 @@ class SiliconFlowAdapter(BaseAdapter):
     rerank -> httpx via /v1/rerank
     """
 
-    def __init__(self, provider: Provider, models: list[Model]):
+    provider: Provider
+    _chat_models: list[Model]
+    _embed_models: list[Model]
+    _rerank_models: list[Model]
+    _client: OpenAI
+    _chat_model_name: str | None
+    _embed_model_name: str | None
+    _rerank_model_name: str | None
+
+    def __init__(self, provider: Provider, models: list[Model]) -> None:
         self.provider = provider
         self._chat_models = [m for m in models if "chat" in m.roles]
         self._embed_models = [m for m in models if "embed" in m.roles]
@@ -60,7 +74,7 @@ class SiliconFlowAdapter(BaseAdapter):
 
     def rerank(
         self, query: str, documents: list[str], top_n: int
-    ) -> list[dict]:
+    ) -> list[dict[str, Any]]:
         if not self._rerank_model_name:
             raise ValueError(
                 f"No rerank model configured for provider {self.provider.name}"

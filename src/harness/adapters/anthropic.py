@@ -1,9 +1,11 @@
 from crewai import LLM
+from typing_extensions import final
 
-from config import Model, Provider
+from harness.config import Model, Provider
 from .base import BaseAdapter
 
 
+@final
 class AnthropicAdapter(BaseAdapter):
     """
     Provider driver: anthropic
@@ -11,7 +13,12 @@ class AnthropicAdapter(BaseAdapter):
     embed/rerank are not supported by these providers via this interface.
     """
 
-    def __init__(self, provider: Provider, models: list[Model]):
+    provider: Provider
+    _chat_models: list[Model]
+    _embed_models: list[Model]
+    _rerank_models: list[Model]
+
+    def __init__(self, provider: Provider, models: list[Model]) -> None:
         self.provider = provider
         self._chat_models = [m for m in models if "chat" in m.roles]
         self._embed_models = [m for m in models if "embed" in m.roles]
@@ -38,7 +45,7 @@ class AnthropicAdapter(BaseAdapter):
 
     def rerank(
         self, query: str, documents: list[str], top_n: int
-    ) -> list[dict]:
+    ) -> list[dict[str, object]]:
         raise NotImplementedError(
             f"Provider {self.provider.name} (driver=anthropic) does not support rerank"
         )
