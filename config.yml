@@ -1,34 +1,36 @@
-
 providers:
   - name: zhipu
     driver: anthropic
-    url: https://open.bigmodel.cn/api/anthropic
-    token: 2f1338894c9942efb90af06eac4c4bdf.VCLW6FSNn35QqzR3
+    base_url: https://open.bigmodel.cn/api/anthropic
+    api_key: "${ZHIPU_API_KEY}"
+
   - name: minimax
     driver: anthropic
-    url: https://platform.minimaxi.com
-    token: sk-cp-IY2En8vtyGu2C78q8YZq5tVTQqJOQhb_nrZnciQQ7n7Fw0mZbfAkQxS85hm452OkAQJOAng_NJYgVKrGZW15vvRN6L1u15CZSCrrNPUY8cQyvdcvTmjirk8
+    base_url: https://api.minimaxi.com/anthropic
+    api_key: "${MINIMAX_API_KEY}"
+
   - name: siliconflow
-    driver: siliconflow # 这个 driver 怎么定义？ 模型还需要兼容 chat、embed、rerank
-    token: sk-qhjitekqnakypkhelgknwcbsvlfmcwskvytovtxkeprrtkvf
+    driver: siliconflow
+    base_url: https://api.siliconflow.cn/v1
+    api_key: "${SILICONFLOW_API_KEY}"
 
 models:
   - name: GLM-5.1
     provider: zhipu
     model: GLM-5.1
-    roles:
-      - chat
+    roles: [chat]
+
+  - name: MiniMax-M2.7
+    provider: minimax
+    model: MiniMax-M2.7
+    roles: [chat]
+
   - name: Qwen/Qwen3-Embedding-8B
     provider: siliconflow
     model: Qwen/Qwen3-Embedding-8B
-    roles:
-      - embed
+    roles: [embed]
+
   - name: Qwen/Qwen3-Reranker-8B
     provider: siliconflow
     model: Qwen/Qwen3-Reranker-8B
-    roles:
-      - rerank
-
-
-  
-  
+    roles: [rerank]
