@@ -1,4 +1,4 @@
-from config import Config
+from harness.config import Config
 
 from .anthropic import AnthropicAdapter
 from .base import BaseAdapter
